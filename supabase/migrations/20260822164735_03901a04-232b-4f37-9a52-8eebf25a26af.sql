@@ -1,0 +1,2 @@
+ALTER TABLE public.properties DROP CONSTRAINT properties_category_check;
+ALTER TABLE public.properties ADD CONSTRAINT properties_category_check CHECK (category = ANY (ARRAY['lancamento'::text, 'na-planta'::text, 'pronto'::text, 'usado'::text]));

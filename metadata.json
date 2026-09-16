@@ -1,0 +1,6 @@
+{
+  "name": "Imóvel Conecta",
+  "description": "Plataforma imobiliária para lançamentos, imóveis prontos e usados em Salvador e região com gestão de leads e integração com WhatsApp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

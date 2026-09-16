@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 112" role="img" aria-labelledby="title desc">
+  <title id="title">Lummio</title>
+  <desc id="desc">Logo Lummio com uma serpente colorida e o nome da marca</desc>
+  <rect width="320" height="112" rx="20" fill="#fffdfa"/>
+  <path d="M70 32c-17 4-27 18-27 34 0 15 10 24 26 24 14 0 24-7 28-18" fill="none" stroke="#253355" stroke-width="7" stroke-linecap="round"/>
+  <path d="M105 55v20c0 10 7 15 17 15 11 0 18-6 18-16V55M159 89V55m0 15c0-10 6-16 15-16 9 0 14 6 14 16v19m0-19c0-10 6-16 15-16 9 0 14 6 14 16v19" fill="none" stroke="#253355" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="255" cy="70" r="22" fill="#a783cf"/>
+  <circle cx="255" cy="70" r="11" fill="#fffdfa"/>
+  <path d="m255 61 3 6 6 3-6 3-3 6-3-6-6-3 6-3z" fill="#e9a62f"/>
+  <path d="M229 27c12-9 29-8 38 2" fill="none" stroke="#a783cf" stroke-width="6" stroke-linecap="round"/>
+</svg>

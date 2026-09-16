@@ -1,0 +1,1 @@
+DELETE FROM public.leads WHERE message LIKE 'Teste QA%';
