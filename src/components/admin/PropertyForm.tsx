@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import {
@@ -13,6 +13,7 @@ import {
   CreditCard,
   FileCheck,
   Image as ImageIcon,
+  ImagePlus,
   Landmark,
   Layers,
   MapPin,
@@ -50,6 +51,7 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { ImageUploadField } from "@/components/site/ImageUploadField";
 import { getYouTubeId } from "@/components/site/PropertyVideo";
+import { toast } from "sonner";
 import {
   BROKER_CHECKLIST_OPTIONS,
   DIFFERENTIAL_OPTIONS,
@@ -63,6 +65,7 @@ import {
   type PropertyType,
 } from "@/data/properties";
 import type { PropertyFormValues } from "@/lib/properties.api";
+import { ACCEPTED_EXT, ImageUploadError, uploadPropertyImage } from "@/lib/image-upload";
 import { slugify } from "@/lib/properties.api";
 import { FINANCING_OPTIONS } from "@/lib/property-filters";
 
@@ -75,6 +78,8 @@ interface PropertyFormProps {
 
 export function PropertyForm({ form, setForm, onSubmit, isPending }: PropertyFormProps) {
   const [newGalleryUrl, setNewGalleryUrl] = useState("");
+  const [uploadingGalleryImages, setUploadingGalleryImages] = useState(false);
+  const galleryInputRef = useRef<HTMLInputElement>(null);
   const cityNeighborhoods = getNeighborhoodsForCity(form.city);
   const videoId = getYouTubeId(form.youtubeUrl);
 
@@ -152,6 +157,43 @@ export function PropertyForm({ form, setForm, onSubmit, isPending }: PropertyFor
       galleryImages: [...(prev.galleryImages || []), newGalleryUrl.trim()],
     }));
     setNewGalleryUrl("");
+  }
+
+  async function uploadGalleryImages(files: FileList | null) {
+    if (!files?.length || uploadingGalleryImages) return;
+
+    setUploadingGalleryImages(true);
+    let uploadedCount = 0;
+
+    try {
+      for (const file of Array.from(files)) {
+        try {
+          const uploaded = await uploadPropertyImage(file);
+          setForm((prev) => ({
+            ...prev,
+            galleryImages: [...(prev.galleryImages || []), uploaded.url],
+          }));
+          uploadedCount++;
+        } catch (error) {
+          const message =
+            error instanceof ImageUploadError
+              ? error.message
+              : "Não foi possível enviar a imagem. Verifique sua conexão e tente novamente.";
+          toast.error(`${file.name}: ${message}`);
+        }
+      }
+
+      if (uploadedCount > 0) {
+        toast.success(
+          uploadedCount === 1
+            ? "Imagem enviada para a galeria."
+            : `${uploadedCount} imagens enviadas para a galeria.`,
+        );
+      }
+    } finally {
+      setUploadingGalleryImages(false);
+      if (galleryInputRef.current) galleryInputRef.current.value = "";
+    }
   }
 
   function removeGalleryImage(index: number) {
@@ -441,6 +483,23 @@ export function PropertyForm({ form, setForm, onSubmit, isPending }: PropertyFor
 
         <div className="space-y-3 pt-3 border-t border-border/80">
           <Label className="text-sm font-semibold">Fotos Adicionais da Galeria</Label>
+          <input
+            ref={galleryInputRef}
+            type="file"
+            accept={ACCEPTED_EXT.join(",")}
+            multiple
+            className="hidden"
+            onChange={(event) => void uploadGalleryImages(event.target.files)}
+          />
+          <Button
+            type="button"
+            variant="outline"
+            disabled={uploadingGalleryImages}
+            onClick={() => galleryInputRef.current?.click()}
+          >
+            <ImagePlus />
+            {uploadingGalleryImages ? "Enviando imagens..." : "Selecionar imagens do computador"}
+          </Button>
           <div className="flex gap-2">
             <Input
               value={newGalleryUrl}
