@@ -11,9 +11,7 @@ export function Footer() {
       <div className="container-page grid gap-10 py-12 md:grid-cols-3">
         <div>
           <div className="flex items-center gap-2">
-            <span className="flex size-9 items-center justify-center rounded-lg bg-brand text-brand-foreground">
-              <Building2 className="size-5" />
-            </span>
+            <img src="/logo2.png" alt="Moreira Imóveis" className="h-9 w-auto object-contain" />
             <span className="font-display text-base font-bold">{siteConfig.brandName}</span>
           </div>
           <p className="mt-3 max-w-xs text-sm text-muted-foreground">

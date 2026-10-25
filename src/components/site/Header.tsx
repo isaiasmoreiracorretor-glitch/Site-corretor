@@ -35,9 +35,7 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur">
       <div className="container-page flex h-16 items-center justify-between gap-1 md:gap-4">
         <Link to="/" className="flex items-center gap-2">
-          <span className="flex size-9 items-center justify-center rounded-lg bg-brand text-brand-foreground">
-            <Building2 className="size-5" />
-          </span>
+            <img src="/logo.png" alt="Moreira Imóveis" className="h-9 w-auto object-contain" />
           <span className="leading-tight">
             <span className="block font-display text-base font-bold">{siteConfig.brandName}</span>
             <span className="block text-[11px] text-muted-foreground">{siteConfig.creci}</span>
