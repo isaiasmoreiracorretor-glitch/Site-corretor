@@ -181,6 +181,7 @@ const sortPtBR = (list: string[]) => [...list].sort((a, b) => a.localeCompare(b,
 export const neighborhoodsByCity: Record<string, string[]> = {
   Salvador: sortPtBR([
     "Barra",
+    "Massaranduba",
     "Boca do Rio",
     "Brotas",
     "Cabula",
