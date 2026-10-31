@@ -3,7 +3,7 @@
  * Altere estes dados para personalizar o site (nome, WhatsApp, CRECI, etc).
  */
 export const siteConfig = {
-  brokerName: "Moreira",
+  brokerName: "Isaias Moreira",
   brandName: "Moreira Imóveis",
   tagline: "Lançamentos, prontos para morar e usados em Salvador e Região",
   creci: "CRECI-BA 32.373",
